@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Скрипт для настройки Ansible на BR-SRV
+
+# Установка Ansible
+apt-get update -y
+apt-get install -y software-properties-common
+add-apt-repository --yes --update ppa:ansible/ansible
+apt-get install -y ansible
+
+# Создание рабочего каталога Ansible
+mkdir -p /etc/ansible
+
+# Создание файла инвентаря
+cat <<EOF > /etc/ansible/hosts
+[servers]
+HQ-SRV
+HQ-CLI
+BR-SRV
+
+[routers]
+HQ-RTR
+BR-RTR
+
+[servers:vars]
+ansible_user=sshuser
+
+[routers:vars]
+ansible_user=net_admin
+EOF
+
+echo "Ansible установлен, и файл инвентаря создан в /etc/ansible/hosts."
+echo "Убедитесь, что SSH-ключи настроены для беспарольного доступа к управляемым узлам."
+echo "Для проверки подключения выполните: ansible all -m ping"
