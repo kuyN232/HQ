@@ -15,3 +15,15 @@ https://download.yandex.ru/browser/alt-os/yandex-browser.rpm
         Для проверки:
         Moodle: открой http://hq-srv.au-team.irpo в браузере.
         MediaWiki: открой http://br-srv.au-team.irpo:8080 в браузере.
+  10_M2.sh
+        Настрой SSH-ключи для беспарольного доступа:
+        Для серверов:
+        ssh-copy-id sshuser@hq-srv.au-team.irpo
+        ssh-copy-id sshuser@hq-cli.au-team.irpo
+        ssh-copy-id sshuser@br-srv.au-team.irpo
+        Для маршрутизаторов:
+        ssh-copy-id net_admin@hq-rtr.au-team.irpo
+        ssh-copy-id net_admin@br-rtr.au-team.irpo
+        Выполни проверку:
+        ansible all -m ping
+        Ожидаемый результат: все узлы возвращают pong.
